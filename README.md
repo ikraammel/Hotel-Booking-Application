@@ -1,10 +1,21 @@
 # Hotel Booking Application
 
-A hotel booking application project.
+A full-stack web application that allows users to browse, reserve, and manage hotel rooms.
 
-## Repository overview
+## Key features
 
-This repository is part of my software engineering portfolio. It contains the implementation and supporting project files for **Hotel Booking Application**.
+- Browse available hotel rooms
+- Make hotel room reservations
+- Manage bookings
+- Secure application backend
+
+## Technology stack
+
+- React.js
+- Java
+- Spring Boot
+- Spring Security
+- PostgreSQL
 
 ## Getting started
 
@@ -14,12 +25,11 @@ Clone the repository:
 git clone https://github.com/ikraammel/Hotel-Booking-Application.git
 cd Hotel-Booking-Application
 ```
+Install the dependencies for the relevant application components and configure any required environment variables or external services according to the project source.
 
-Review the source files and dependency manifests for the project's runtime and configuration requirements.
+## About this project
 
-## Project structure
-
-Browse the source folders in this repository to explore the implementation. For projects with separate frontend and backend components, configure and run each component independently.
+Part of my software engineering project portfolio.
 
 ## Author
 
