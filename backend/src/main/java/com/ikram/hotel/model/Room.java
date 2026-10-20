@@ -25,6 +25,7 @@ public class Room {
     private Long id;
     private String roomType;
     private BigDecimal roomPrice;
+    private String description;
     private boolean isBooked = false;
 
     @JdbcTypeCode(SqlTypes.VARBINARY)

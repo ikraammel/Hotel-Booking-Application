@@ -20,9 +20,10 @@ import java.util.Optional;
 public class RoomService implements IRoomService{
     private final RoomRepository roomRepository;
     @Override
-    public Room addNewRoom(MultipartFile file, String roomType , BigDecimal roomPrice) throws IOException {
+    public Room addNewRoom(MultipartFile file, String roomType, String description, BigDecimal roomPrice) throws IOException {
         Room room = new Room();
         room.setRoomType(roomType);
+        room.setDescription(description);
         room.setRoomPrice(roomPrice);
         if(!file.isEmpty()){
             byte[] photoBytes = file.getBytes();
@@ -58,10 +59,11 @@ public class RoomService implements IRoomService{
     }
 
     @Override
-    public Room updateRoom(Long roomId, String roomType, BigDecimal roomPrice,byte[] photoBytes) {
+    public Room updateRoom(Long roomId, String roomType, String description, BigDecimal roomPrice, byte[] photoBytes) {
         Room room = roomRepository.findById(roomId)
                 .orElseThrow(() -> new ResourceNotFoundException("Room not found"));
         if(roomType != null) room.setRoomType(roomType);
+        if(description != null) room.setDescription(description);
         if(roomPrice != null) room.setRoomPrice(roomPrice);
         if(photoBytes != null && photoBytes.length > 0) {
             room.setPhoto(photoBytes);
