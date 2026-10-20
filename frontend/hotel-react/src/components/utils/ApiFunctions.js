@@ -20,12 +20,14 @@ export const getHeader = () => {
 
 // to add a new room to the db
 
-export async function addRoom(photo, roomType, roomPrice) {
+
+export async function addRoom(photo, roomType, roomPrice, description) {
   const formData = new FormData();
 
   formData.append("photo", photo);
   formData.append("roomType", roomType);
   formData.append("roomPrice", roomPrice);
+  formData.append("description", description);
 
   const token = localStorage.getItem("token");
 
@@ -43,6 +45,7 @@ export async function addRoom(photo, roomType, roomPrice) {
 
   return response.status === 201;
 }
+
 
 
 // To get all room types from the db
@@ -85,6 +88,7 @@ export async function updateRoom(roomId, roomData) {
 
     formData.append("roomType", roomData.roomType);
     formData.append("roomPrice", roomData.roomPrice);
+    formData.append("description", roomData.description);
 
     if (roomData.photo instanceof File) {
       formData.append("photo", roomData.photo);
