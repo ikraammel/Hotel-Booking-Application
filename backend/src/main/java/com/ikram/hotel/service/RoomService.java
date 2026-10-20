@@ -9,11 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.sql.rowset.serial.SerialBlob;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.sql.Blob;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -23,14 +20,13 @@ import java.util.Optional;
 public class RoomService implements IRoomService{
     private final RoomRepository roomRepository;
     @Override
-    public Room addNewRoom(MultipartFile file, String roomType , BigDecimal roomPrice) throws SQLException, IOException {
+    public Room addNewRoom(MultipartFile file, String roomType , BigDecimal roomPrice) throws IOException {
         Room room = new Room();
         room.setRoomType(roomType);
         room.setRoomPrice(roomPrice);
         if(!file.isEmpty()){
-            byte[] photoByte = file.getBytes();
-            Blob photoBlob = new SerialBlob(photoByte);
-            room.setPhoto(photoBlob);
+            byte[] photoBytes = file.getBytes();
+            room.setPhoto(photoBytes);
         }
         return roomRepository.save(room);
     }
@@ -47,16 +43,13 @@ public class RoomService implements IRoomService{
     }
 
     @Override
-    public byte[] getRoomPhotoByRoomId(Long roomId) throws SQLException {
+    public byte[] getRoomPhotoByRoomId(Long roomId) {
         Optional<Room> theRoom= roomRepository.findById(roomId);
         if(theRoom.isEmpty()){
             throw new ResourceNotFoundException("Sorry, Room not found!");
         }
-        Blob photoBlob = theRoom.get().getPhoto();
-        if(photoBlob != null){
-            return photoBlob.getBytes(1,(int) photoBlob.length());
-        }
-        return null;
+        byte[] photoBytes = theRoom.get().getPhoto();
+        return photoBytes;
     }
 
     @Override
@@ -71,11 +64,7 @@ public class RoomService implements IRoomService{
         if(roomType != null) room.setRoomType(roomType);
         if(roomPrice != null) room.setRoomPrice(roomPrice);
         if(photoBytes != null && photoBytes.length > 0) {
-            try{
-                room.setPhoto(new SerialBlob(photoBytes));
-            }catch(SQLException ex){
-                throw new InternalServerException("Error updating room");
-            }
+            room.setPhoto(photoBytes);
         }
         return roomRepository.save(room);
     }

@@ -7,9 +7,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.math.BigDecimal;
-import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,9 +27,10 @@ public class Room {
     private BigDecimal roomPrice;
     private boolean isBooked = false;
 
-    @Lob
+    @JdbcTypeCode(SqlTypes.VARBINARY)
+    @Column(name = "photo", columnDefinition = "bytea")
     @JsonIgnore
-    private Blob photo;
+    private byte[] photo;
 
     @OneToMany(mappedBy = "room", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JsonIgnore
