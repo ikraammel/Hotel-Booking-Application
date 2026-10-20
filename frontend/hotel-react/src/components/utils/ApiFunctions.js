@@ -25,9 +25,16 @@ export async function addRoom(photo, roomType, roomPrice) {
   formData.append("roomType", roomType);
   formData.append("roomPrice", roomPrice);
 
-  const response = await api.post("/rooms/add/new-room", formData, {
-    headers: getHeader()
-  });
+   const response = await api.post(
+    "/rooms/add/new-room",
+    formData,
+    {
+      headers: {
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        "Content-Type": undefined
+      }
+    }
+  );
 
   return response.status === 201;
 }
@@ -73,7 +80,12 @@ export async function updateRoom(roomId, roomData) {
     formData.append("photo", roomData.photo);
 
     const response = await api.put(`/rooms/update/${roomId}`, formData, {
-      headers: getHeader()
+      headers: {
+        ...(localStorage.getItem("token")
+          ? { Authorization: `Bearer ${localStorage.getItem("token")}` }
+          : {}),
+        "Content-Type": undefined
+    }
     });
 
     return response;
