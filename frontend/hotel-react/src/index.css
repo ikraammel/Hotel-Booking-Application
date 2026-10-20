@@ -191,6 +191,7 @@ body {
   position: relative;
   height: 500px;
   background: url("/hotel3.jpg") center center / cover no-repeat;
+}
 
 @media (max-width: 768px) {
   .header-banner h1 {
