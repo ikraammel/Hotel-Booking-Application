@@ -86,7 +86,7 @@ body {
 /* ------------------ PARALLAX & HEADER ------------------ */
 .parallax {
   margin-top: 50px;
-  background-image: url("service.jpeg");
+  background-image: url("/service.jpeg");
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -99,7 +99,7 @@ body {
 .header {
   position: relative;
   height: 150px;
-  background: url("service.jpg") center center / cover no-repeat;
+  background: url("/service.jpg") center center / cover no-repeat;
 }
 
 .header-title {
@@ -190,8 +190,7 @@ body {
 .header-banner {
   position: relative;
   height: 500px;
-  background: url("hotel3.jpg") center center / cover no-repeat;
-}
+  background: url("/hotel3.jpg") center center / cover no-repeat;
 
 @media (max-width: 768px) {
   .header-banner h1 {
