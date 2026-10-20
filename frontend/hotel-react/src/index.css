@@ -1,0 +1,217 @@
+/* Base layout */
+body {
+  min-height: 100vh;
+  padding-bottom: 50px;
+}
+
+.card {
+  opacity: 0.9;
+}
+
+/* ------------------ NAVBAR ------------------ */
+.navbar {
+  padding: 0;
+}
+
+.navbar .navbar-nav .nav-link {
+  padding: 1em;
+  color: rgb(25, 24, 24);
+}
+
+.navbar .navbar-brand {
+  color: rgb(25, 24, 24);
+}
+
+.navbar .navbar-nav .nav-item {
+  position: relative;
+}
+
+.navbar .navbar-nav .nav-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  width: 0;
+  margin: 0 auto;
+  background-color: rgb(169, 77, 123);
+  transition: width 0.5s;
+}
+
+.navbar .navbar-nav .nav-item:hover::after {
+  width: 100%;
+}
+
+/* Responsive navbar padding */
+@media screen and (min-width: 992px) {
+  .navbar .navbar-nav .nav-link {
+    padding: 1em 0;
+  }
+
+  .navbar .navbar-nav .nav-item {
+    margin: 0 1em;
+  }
+}
+
+/* ------------------ CUSTOM BUTTON ------------------ */
+.btn-hotel {
+  background-color: rgb(169, 77, 123) !important;
+  color: #fff !important;
+}
+
+.btn-hotel:hover {
+  background-color: rgb(137, 127, 132) !important;
+  color: #fff !important;
+  transition: background-color 0.7s ease;
+}
+
+/* ------------------ COLOR CLASSES ------------------ */
+.hotel-color {
+  color: rgb(169, 77, 123);
+}
+
+.room-price {
+  color: darkgoldenrod;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: medium;
+}
+
+/* ------------------ DECORATION ------------------ */
+.vertical-rule {
+  border-left: 0.5px solid black;
+  height: 100vh;
+}
+
+/* ------------------ PARALLAX & HEADER ------------------ */
+.parallax {
+  margin-top: 50px;
+  background-image: url("service.jpeg");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 50vh;
+  color: white;
+  text-shadow: 2px 2px black;
+}
+
+.header {
+  position: relative;
+  height: 150px;
+  background: url("service.jpg") center center / cover no-repeat;
+}
+
+.header-title {
+  color: #fff;
+  font-size: 4rem;
+}
+
+/* ------------------ ANIMATIONS ------------------ */
+.animated {
+  animation-duration: 1s;
+}
+
+.animated-texts h1 {
+  animation: fadeInDown 1s ease-in-out;
+}
+
+.animated-texts p, 
+.animated-texts h1, 
+.animated-texts h2 {
+  animation: fadeInUp 1s ease-in-out;
+}
+
+@keyframes bounceIn {
+  0%, 20%, 40%, 60%, 80%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(0, -30px, 0);
+  }
+
+  70% {
+    transform: translate3d(0, -15px, 0);
+  }
+
+  90% {
+    transform: translate3d(0, -4px, 0);
+  }
+}
+
+.bounceIn {
+  animation-name: bounceIn;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -50%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 50%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ------------------ OVERLAY ------------------ */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.overlay-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+}
+
+/* ------------------ HEADER BANNER ------------------ */
+.header-banner {
+  position: relative;
+  height: 500px;
+  background: url("hotel3.jpg") center center / cover no-repeat;
+}
+
+@media (max-width: 768px) {
+  .header-banner h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-banner h1 {
+    font-size: 16px;
+  }
+}
+
+/* ------------------ FOOTER ------------------ */
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #f5f5f5;
+  height: 60px;
+  text-align: center;
+}
