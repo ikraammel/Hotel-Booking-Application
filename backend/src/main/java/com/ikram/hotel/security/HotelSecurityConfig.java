@@ -6,6 +6,7 @@ import com.ikram.hotel.security.user.HotelUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -62,11 +63,26 @@ public class HotelSecurityConfig {
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/auth/**").permitAll()
+
                         .requestMatchers(
-                                "/auth/**",
-                                "/rooms/**"
-                        ).permitAll() // Chemins publics
+                                HttpMethod.GET, "/rooms/**"
+                        ).permitAll()
+
+                        .requestMatchers(
+                                HttpMethod.POST, "/rooms/**"
+                        ).hasRole("ADMIN")
+
+                        .requestMatchers(
+                                HttpMethod.PUT, "/rooms/**"
+                        ).hasRole("ADMIN")
+
+                        .requestMatchers(
+                                HttpMethod.DELETE, "/rooms/**"
+                        ).hasRole("ADMIN")
+
                         .requestMatchers("/roles/**").hasRole("ADMIN")
+
                         .anyRequest().authenticated()
                 );
 
