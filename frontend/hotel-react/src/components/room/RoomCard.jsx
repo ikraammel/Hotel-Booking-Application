@@ -29,7 +29,7 @@ const RoomCard = ({ room }) => {
           <div className='flex-grow-1 ml-3 px-3 px-md-4' style={{ minWidth: '250px' }}>
             <Card.Title className='hotel-color' style={{ fontSize: '1.25rem' }}>{room.roomType}</Card.Title>
             <Card.Title className='room-price' style={{ fontSize: '1.1rem' }}>{room.roomPrice} DH / night</Card.Title>
-            <Card.Text className='text-muted' style={{ fontSize: '0.9rem' }}>Some room info goes here...</Card.Text>
+            <Card.Text className='text-muted' style={{ fontSize: '0.9rem' }}>{room.description}</Card.Text>
           </div>
           <div className='flex-shrink-0 mt-3'>
             <Link to={`/book-room/${room.id}`} className='btn btn-hotel btn-sm'>
