@@ -42,8 +42,11 @@ public class RoomController {
                                                    @RequestParam("roomPrice") BigDecimal roomPrice) throws IOException {
 
         Room savedRoom = roomService.addNewRoom(photo, roomType, description, roomPrice);
-        RoomResponse response = new RoomResponse(savedRoom.getId(), savedRoom.getRoomType(), savedRoom.getRoomPrice());
-        return ResponseEntity.ok(response);
+        RoomResponse response = getRoomResponse(savedRoom);
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(response);
     }
 
     @GetMapping("/room-types")
