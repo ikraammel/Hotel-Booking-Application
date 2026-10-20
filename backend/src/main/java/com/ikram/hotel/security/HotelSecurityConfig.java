@@ -65,6 +65,7 @@ public class HotelSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/error").permitAll()
+                        .requestMatchers("/api/health").permitAll()
 
                         .requestMatchers(
                                 HttpMethod.GET, "/rooms/**"
