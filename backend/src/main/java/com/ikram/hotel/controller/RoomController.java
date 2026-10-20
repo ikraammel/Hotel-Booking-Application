@@ -100,16 +100,31 @@ public class RoomController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+
     @PutMapping("/update/{roomId}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<RoomResponse> updateRoom(@PathVariable Long roomId,
-                                                   @RequestParam(required = false) String roomType,
-                                                   @RequestParam(required = false) String description,
-                                                   @RequestParam(required = false) BigDecimal roomPrice,
-                                                   @RequestParam(required = false) MultipartFile photo) throws IOException {
-        byte[] photoBytes = photo != null && !photo.isEmpty() ? photo.getBytes() : roomService.getRoomPhotoByRoomId(roomId);
-        Room theRoom = roomService.updateRoom(roomId, roomType, description, roomPrice, photoBytes);
-        RoomResponse response = getRoomResponse(theRoom);
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<RoomResponse> updateRoom(
+            @PathVariable Long roomId,
+            @RequestParam(required = false) String roomType,
+            @RequestParam(required = false) String description,
+            @RequestParam(required = false) BigDecimal roomPrice,
+            @RequestParam(required = false) MultipartFile photo
+    ) throws IOException {
+
+        byte[] photoBytes = (photo != null && !photo.isEmpty())
+                ? photo.getBytes()
+                : null;
+
+        Room updatedRoom = roomService.updateRoom(
+                roomId,
+                roomType,
+                description,
+                roomPrice,
+                photoBytes
+        );
+
+        RoomResponse response = getRoomResponse(updatedRoom);
+
         return ResponseEntity.ok(response);
     }
 
