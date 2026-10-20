@@ -19,25 +19,31 @@ export const getHeader = () => {
 };
 
 // to add a new room to the db
+
 export async function addRoom(photo, roomType, roomPrice) {
   const formData = new FormData();
+
   formData.append("photo", photo);
   formData.append("roomType", roomType);
   formData.append("roomPrice", roomPrice);
 
-   const response = await api.post(
+  const token = localStorage.getItem("token");
+
+  const response = await api.post(
     "/rooms/add/new-room",
     formData,
     {
       headers: {
-        ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        "Content-Type": undefined
+        ...(token
+          ? { Authorization: `Bearer ${token}` }
+          : {})
       }
     }
   );
 
   return response.status === 201;
 }
+
 
 // To get all room types from the db
 export async function getRoomTypes() {
@@ -72,27 +78,38 @@ export async function deleteRoom(roomId) {
 }
 
 // To update a room
+
 export async function updateRoom(roomId, roomData) {
   try {
     const formData = new FormData();
+
     formData.append("roomType", roomData.roomType);
     formData.append("roomPrice", roomData.roomPrice);
-    formData.append("photo", roomData.photo);
 
-    const response = await api.put(`/rooms/update/${roomId}`, formData, {
-      headers: {
-        ...(localStorage.getItem("token")
-          ? { Authorization: `Bearer ${localStorage.getItem("token")}` }
-          : {}),
-        "Content-Type": undefined
+    if (roomData.photo instanceof File) {
+      formData.append("photo", roomData.photo);
     }
-    });
+
+    const token = localStorage.getItem("token");
+
+    const response = await api.put(
+      `/rooms/update/${roomId}`,
+      formData,
+      {
+        headers: {
+          ...(token
+            ? { Authorization: `Bearer ${token}` }
+            : {})
+        }
+      }
+    );
 
     return response;
   } catch (error) {
     throw new Error(`Error updating room: ${error.message}`);
   }
 }
+
 
 // To get a room by id
 export async function getRoomById(roomId) {
