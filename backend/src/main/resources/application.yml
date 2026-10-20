@@ -1,0 +1,8 @@
+
+spring:
+  application:
+    name: hotel-booking
+
+logging:
+  level:
+    org.springframework: INFO

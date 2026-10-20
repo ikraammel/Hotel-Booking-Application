@@ -1,0 +1,39 @@
+
+# Maven
+target/
+*.jar
+!.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.idea/
+*.iws
+*.iml
+*.ipr
+.vscode/
+.settings/
+.classpath
+.project
+.factorypath
+.springBeans
+.sts4-cache
+.apt_generated
+
+# NetBeans
+nbproject/private/
+nbbuild/
+dist/
+nbdist/
+.nbgradle/
+build/
+
+# Environment
+.env
+.env.*
+
+# Local Spring Boot configuration
+src/main/resources/application-local.yaml
+src/main/resources/application-local.yml
+src/main/resources/application-local.properties
+
+# Git backups
+*.bundle
